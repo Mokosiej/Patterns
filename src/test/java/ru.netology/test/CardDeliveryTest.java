@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class CardDeliveryTest {
+class CardDeliveryTest {
 
 
     @BeforeEach
@@ -22,7 +22,7 @@ public class CardDeliveryTest {
     }
 
     @Test
-    @DisplayName("Should successful plan meeting")
+    @DisplayName("Should successful plan and replan meeting")
     public void shouldSuccessfulPlanMeeting() {
         var validUser = DataGenerator.Registration.generateUser("ru");
         var daysToAddForFirstMeeting = 4;
@@ -43,10 +43,10 @@ public class CardDeliveryTest {
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(secondMeetingDate);
         $(byText("Запланировать")).click();
-        $("[data-test-id='success-notification'] .notification__content")
+        $("[data-test-id='replan-notification'] .notification__content")
                 .shouldHave(text("У вас уже запланирована встреча на другую дату. Перепланировать?"))
                 .shouldBe(visible);
-        $("[data-test-id='success-notification'] button").click();
+        $("[data-test-id='replan-notification'] button").click();
         $("[data-test-id='success-notification'] .notification__content")
                 .shouldHave(exactText("Встреча успешно запланирована на " + firstMeetingDate))
                 .shouldBe(visible);
