@@ -23,7 +23,7 @@ class CardDeliveryTest {
 
     @Test
     @DisplayName("Should successful plan and replan meeting")
-    public void shouldSuccessfulPlanMeeting() {
+    void shouldSuccessfulPlanMeeting() {
         var validUser = DataGenerator.Registration.generateUser("ru");
         var daysToAddForFirstMeeting = 4;
         var firstMeetingDate = DataGenerator.generateDate(daysToAddForFirstMeeting);
@@ -48,7 +48,7 @@ class CardDeliveryTest {
                 .shouldBe(visible);
         $("[data-test-id='replan-notification'] button").click();
         $("[data-test-id='success-notification'] .notification__content")
-                .shouldHave(exactText("Встреча успешно запланирована на " + firstMeetingDate))
+                .shouldHave(exactText("Встреча успешно запланирована на " + secondMeetingDate))
                 .shouldBe(visible);
 
     }
